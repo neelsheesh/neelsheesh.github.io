@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Science Portfolio</title>
+    <title>Neel Shisheer - Data Science Portfolio</title>
     
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -234,16 +234,17 @@
     <script>
         function portfolio() {
             return {
+                // ===== YOUR PORTFOLIO DATA - EDIT BELOW =====
                 data: {
                     personal: {
-                        name: "neel shisheer.",
-                        initials: "ns.",
-                        title: "graduate data scientist eager to work",
-                        tagline: "transforming complex data into actionable insights for business",
+                        name: "Neel Shisheer",
+                        initials: "NS",
+                        title: "Graduate Data Scientist",
+                        tagline: "Transforming complex data into actionable business insights",
                         about: [
-                            "I'm a data scientist specializing in machine learning, statistical modeling, and predictive analytics. With a passion for solving complex problems, I build end-to-end data science solutions that drive business value.",
-                            "My expertise spans the full data science lifecycle—from data collection and feature engineering to model deployment and monitoring. I combine technical rigor with business acumen to deliver insights that inform strategic decision-making.",
-                            "I believe in the power of data to transform organizations and am constantly exploring new techniques in deep learning, NLP, and computer vision to push the boundaries of what's possible."
+                            "Recent graduate with a strong foundation in data science, machine learning, and statistical analysis. Passionate about leveraging data to solve real-world problems and drive business value through predictive modeling and data-driven insights.",
+                            "Proficient in the full data science workflow—from data collection and preprocessing through exploratory analysis, model development, and visualization. Experienced with Python, R, SQL, and big data tools including Apache Spark and cloud platforms.",
+                            "Eager to apply academic knowledge and hands-on project experience to contribute to a forward-thinking data science team. Continuously learning and staying current with the latest developments in machine learning, NLP, and data engineering."
                         ],
                         contacts: {
                             github: "https://github.com/neelsheesh",
@@ -254,33 +255,33 @@
                     },
 
                     stats: [
-                        { value: "1", label: "Projects Completed" },
-                        { value: "1", label: "ML Models Deployed" },
-                        { value: "1", label: "Years Experience" },
-                        { value: "1", label: "Model Accuracy Avg" }
+                        { value: "10+", label: "Academic Projects" },
+                        { value: "5+", label: "Tech Stacks" },
+                        { value: "3+", label: "Certifications" },
+                        { value: "100%", label: "Commitment" }
                     ],
 
                     highlights: [
                         {
-                            icon: "",
-                            title: "placeholder",
-                            description: "Expertise in supervised/unsupervised learning, ensemble methods, and deep learning architectures"
+                            icon: "🎓",
+                            title: "Machine Learning",
+                            description: "Strong foundation in supervised and unsupervised learning, with hands-on experience in ensemble methods, neural networks, and model evaluation"
                         },
                         {
-                            icon: "",
-                            title: "placeholder",
-                            description: "Building scalable pipelines for data processing, ETL workflows, and real-time analytics"
+                            icon: "📊",
+                            title: "Data Analytics",
+                            description: "Proficient in exploratory data analysis, statistical testing, A/B testing, and creating compelling visualizations for stakeholders"
                         },
                         {
-                            icon: "",
-                            title: "placeholder",
-                            description: "Production-ready model deployment with Docker, Kubernetes, and CI/CD pipelines"
+                            icon: "⚡",
+                            title: "Big Data Tools",
+                            description: "Experience with Apache Spark, Hadoop ecosystem, and cloud platforms for processing and analyzing large-scale datasets"
                         }
                     ],
 
                     skills: [
                         {
-                            category: "languages",
+                            category: "Languages",
                             items: [
                                 "Python",
                                 "R",
@@ -295,6 +296,8 @@
                                 "TensorFlow",
                                 "PyTorch",
                                 "Scikit-learn",
+                                "Keras",
+                                "XGBoost"
                             ]
                         },
                         {
@@ -304,10 +307,11 @@
                                 "Apache Spark",
                                 "Elastic MapReduce",
                                 "Maven",
+                                "Jupyter"
                             ]
                         },
                         {
-                            category: "Visualisation",
+                            category: "Visualization",
                             items: [
                                 "Matplotlib & Seaborn",
                                 "Plotly & Dash",
@@ -322,45 +326,103 @@
                                 "PostgreSQL",
                                 "MongoDB",
                                 "Azure SQL",
+                                "MySQL",
+                                "SQLite"
                             ]
                         },
                         {
-                            category: "Specialisations",
+                            category: "Cloud & DevOps",
                             items: [
-                                "Data Analysis for Business",
-                                "Time Series",
+                                "AWS (EC2, S3, Lambda)",
+                                "Azure",
+                                "Docker",
+                                "Git & GitHub",
+                                "Terraform"
+                            ]
+                        },
+                        {
+                            category: "Specializations",
+                            items: [
+                                "Business Analytics",
+                                "Time Series Analysis",
                                 "Recommender Systems",
-                                "A/B Testing"
+                                "A/B Testing",
+                                "ETL Pipelines"
                             ]
                         },
                         {
                             category: "Tools",
                             items: [
-                                "Git & GitHub",
-                                "Jupyter",
                                 "VS Code",
+                                "Jupyter Notebook",
                                 "Linux/Unix",
-                                "Terraform"
+                                "Excel (Advanced)",
+                                "JIRA"
                             ]
                         }
                     ],
-                    
+
                     projects: [
-                        {<!--
-                            title: "Customer Churn Prediction System",
-                            description: "Built an ensemble ML model combining XGBoost and LightGBM to predict customer churn with 94% accuracy. Implemented real-time scoring API using FastAPI and deployed on AWS Lambda. Reduced churn by 23% through targeted intervention strategies.",
-                            icon: "",
-                            tags: ["Python", "XGBoost", "FastAPI", "AWS Lambda", "MLflow"],
+                        // ADD YOUR REAL PROJECTS HERE!
+                        // Template to follow:
+                        {
+                            title: "Your First Project Title",
+                            description: "Replace this with your actual project description. Include what problem you solved, what technologies you used, and what results you achieved. Be specific with metrics if possible!",
+                            icon: "📊",
+                            tags: ["Python", "Pandas", "Scikit-learn", "Flask"],
                             metrics: [
-                                { value: "94%", label: "Accuracy" },
-                                { value: "23%", label: "Churn Reduction" }
+                                { value: "X%", label: "Accuracy" },
+                                { value: "Y", label: "Data Points" }
                             ],
                             links: {
-                                code: "",
+                                code: "https://github.com/neelsheesh/your-project",
+                                demo: null  // or add demo link if you have one
+                            }
+                        },
+                        {
+                            title: "Academic Capstone Project",
+                            description: "Add details about your university capstone or final year project. What was the problem? What methods did you use? What were the outcomes?",
+                            icon: "🎓",
+                            tags: ["Your", "Technologies", "Here"],
+                            metrics: [
+                                { value: "Metric1", label: "Label" },
+                                { value: "Metric2", label: "Label" }
+                            ],
+                            links: {
+                                code: "https://github.com/neelsheesh/capstone",
                                 demo: null
                             }
-                        -->}
-                        ]
+                        },
+                        {
+                            title: "Kaggle Competition Entry",
+                            description: "If you've participated in any Kaggle competitions, describe your approach, the techniques you used, and your ranking or score.",
+                            icon: "🏆",
+                            tags: ["Kaggle", "Competition", "Tags"],
+                            metrics: [
+                                { value: "Rank", label: "Position" },
+                                { value: "Score", label: "Metric" }
+                            ],
+                            links: {
+                                code: "https://github.com/neelsheesh/kaggle-project",
+                                demo: "https://www.kaggle.com/neelshisheer/notebook"
+                            }
+                        },
+                        {
+                            title: "Data Analysis Dashboard",
+                            description: "Describe any interactive dashboards or visualization projects you've created. What insights did they provide? What tools did you use?",
+                            icon: "📈",
+                            tags: ["Plotly", "Dash", "Pandas"],
+                            metrics: [
+                                { value: "X", label: "Visualizations" },
+                                { value: "Y", label: "Data Sources" }
+                            ],
+                            links: {
+                                code: "https://github.com/neelsheesh/dashboard",
+                                demo: null
+                            }
+                        }
+                        // Add more projects by copying the template above!
+                    ]
                 }
             }
         }
