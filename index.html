@@ -1,699 +1,369 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Science Portfolio</title>
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            950: '#000000',
+                            900: '#0a0a0a',
+                            850: '#0f0f0f',
+                            800: '#1a1a1a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            border-color: #333333;
         }
 
-        :root {
-            --primary: #000000;
-            --secondary: #0a0a0a;
-            --accent: #1a1a1a;
-            --dark: #000000;
-            --light: #ffffff;
-            --text: #a0a0a0;
-            --text-bright: #e5e5e5;
-            --border: #1a1a1a;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.8;
-            color: var(--text);
-            background: var(--primary);
-            font-weight: 300;
-        }
-
-        /* Header & Navigation */
-        header {
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 1.5rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 300;
-            text-decoration: none;
-            color: white;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 3rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-bright);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 300;
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-        }
-
-        .nav-links a:hover {
-            color: white;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: var(--primary);
-            color: white;
-            padding: 180px 2rem 120px;
-            text-align: center;
-            margin-top: 60px;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease;
-            font-weight: 200;
-            letter-spacing: -1px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            opacity: 0.7;
-            animation: fadeInUp 0.8s ease 0.2s backwards;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.4s backwards;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 0;
-            text-decoration: none;
-            font-weight: 300;
-            transition: all 0.3s;
-            display: inline-block;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background: white;
-            color: var(--primary);
-        }
-
-        .btn-primary:hover {
-            background: var(--text-bright);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 1px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: var(--primary);
-        }
-
-        /* Sections */
-        section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 2rem;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 4rem;
-            color: var(--text-bright);
-            position: relative;
-            font-weight: 200;
-            letter-spacing: -0.5px;
-        }
-
-        h2::after {
-            content: '';
-            display: block;
-            width: 40px;
-            height: 1px;
-            background: white;
-            margin: 1.5rem auto 0;
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .profile-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: transparent;
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: var(--text-bright);
-            margin: 0 auto;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            font-size: 1rem;
-            line-height: 2;
-            color: var(--text);
-            font-weight: 300;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: transparent;
-            padding: 2.5rem;
-            border-radius: 0;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-        }
-
-        .skill-category:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .skill-category h3 {
-            color: var(--text-bright);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            font-weight: 300;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border);
-            color: var(--text);
-            font-weight: 300;
-            font-size: 0.95rem;
-        }
-
-        .skill-list li:last-child {
-            border-bottom: none;
-        }
-
-        .skill-list li::before {
-            content: "—";
-            color: var(--text);
-            font-weight: 300;
-            margin-right: 1rem;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: transparent;
-            border-radius: 0;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: all 0.4s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-
-        .project-image {
-            height: 200px;
-            background: var(--secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--text);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-content h3 {
-            color: var(--text-bright);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-        }
-
-        .project-content p {
-            color: var(--text);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-            font-weight: 300;
-            font-size: 0.95rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tag {
-            background: transparent;
-            color: var(--text);
-            padding: 0.4rem 1rem;
-            border-radius: 0;
-            font-size: 0.8rem;
-            font-weight: 300;
-            border: 1px solid var(--border);
-            letter-spacing: 0.5px;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .project-link {
-            color: var(--text-bright);
-            text-decoration: none;
-            font-weight: 300;
-            transition: color 0.3s;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-        }
-
-        .project-link:hover {
-            color: white;
-        }
-
-        /* Contact Section */
-        #contact {
-            background: var(--primary);
-            color: white;
-            margin: 0;
-            max-width: 100%;
-        }
-
-        .contact-content {
-            text-align: center;
-        }
-
-        #contact h2 {
-            color: var(--text-bright);
-        }
-
-        #contact h2::after {
-            background: white;
-        }
-
-        .contact-content p {
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            opacity: 0.7;
-            font-weight: 300;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .social-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: transparent;
-            color: var(--text-bright);
-            text-decoration: none;
-            border-radius: 0;
-            font-weight: 300;
-            transition: all 0.3s;
-            border: 1px solid var(--border);
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-        }
-
-        .social-link:hover {
-            border-color: white;
-            color: white;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary);
-            color: var(--text);
-            text-align: center;
-            padding: 3rem 2rem;
-            font-weight: 300;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            section {
-                padding: 80px 1.5rem;
-            }
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000000; }
+        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #333333; }
     </style>
 </head>
-<body>
+
+<body class="bg-black text-gray-400 antialiased" x-data="portfolio()">
+    
     <!-- Navigation -->
-    <header>
-        <nav>
-            <a href="#" class="logo">DS Portfolio</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav class="fixed top-0 w-full bg-black/95 backdrop-blur-sm border-b border-dark-800 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#" class="text-white font-light tracking-widest text-sm uppercase">
+                    <span x-text="data.personal.initials"></span>
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-400 hover:text-white transition font-light tracking-wide text-sm">About</a>
+                    <a href="#skills" class="text-gray-400 hover:text-white transition font-light tracking-wide text-sm">Skills</a>
+                    <a href="#projects" class="text-gray-400 hover:text-white transition font-light tracking-wide text-sm">Projects</a>
+                    <a href="#contact" class="text-gray-400 hover:text-white transition font-light tracking-wide text-sm">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <h1>Data Science Portfolio</h1>
-        <p>Turning Data into Actionable Insights</p>
-        <div class="cta-buttons">
-            <a href="#projects" class="btn btn-primary">View Projects</a>
-            <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+    <section class="min-h-screen flex items-center justify-center px-4 pt-16">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-extralight text-white mb-6 tracking-tight" x-text="data.personal.name"></h1>
+            <p class="text-xl md:text-2xl text-gray-500 mb-4 font-light" x-text="data.personal.title"></p>
+            <p class="text-lg text-gray-600 mb-12 font-light tracking-wide" x-text="data.personal.tagline"></p>
+            
+            <div class="flex flex-wrap gap-4 justify-center">
+                <a href="#projects" class="px-8 py-3 bg-white text-black font-light tracking-wide hover:bg-gray-200 transition text-sm">
+                    View Projects
+                </a>
+                <a href="#contact" class="px-8 py-3 border border-gray-800 text-white font-light tracking-wide hover:border-gray-600 transition text-sm">
+                    Get in Touch
+                </a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
+                <template x-for="stat in data.stats" :key="stat.label">
+                    <div class="border border-dark-800 p-6 hover-lift">
+                        <div class="text-3xl font-light text-white mb-2" x-text="stat.value"></div>
+                        <div class="text-sm text-gray-600 font-light tracking-wide" x-text="stat.label"></div>
+                    </div>
+                </template>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <div class="profile-img">👨‍💻</div>
-            <div class="about-text">
-                <p>I'm a passionate data scientist with expertise in machine learning, statistical analysis, and data visualization. I love uncovering patterns in complex datasets and building models that solve real-world problems.</p>
-                <p>With a strong foundation in mathematics and programming, I specialize in developing end-to-end data science solutions, from data collection and cleaning to model deployment and monitoring.</p>
-                <p>My approach combines technical rigor with business acumen to deliver insights that drive decision-making and create value.</p>
+    <section id="about" class="py-24 px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-extralight text-white mb-4 tracking-tight">About</h2>
+            <div class="w-12 h-px bg-white mb-12"></div>
+            
+            <div class="space-y-6">
+                <template x-for="paragraph in data.personal.about" :key="paragraph">
+                    <p class="text-gray-400 leading-relaxed font-light" x-text="paragraph"></p>
+                </template>
+            </div>
+
+            <!-- Expertise Highlights -->
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <template x-for="highlight in data.highlights" :key="highlight.title">
+                    <div class="border border-dark-800 p-6 hover-lift">
+                        <div class="text-2xl mb-3" x-text="highlight.icon"></div>
+                        <h3 class="text-white font-light mb-2 tracking-wide" x-text="highlight.title"></h3>
+                        <p class="text-gray-500 text-sm font-light leading-relaxed" x-text="highlight.description"></p>
+                    </div>
+                </template>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills">
-        <h2>Technical Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-category">
-                <h3>Programming</h3>
-                <ul class="skill-list">
-                    <li>Python (NumPy, Pandas, Scikit-learn)</li>
-                    <li>R (tidyverse, caret)</li>
-                    <li>SQL (PostgreSQL, MySQL)</li>
-                    <li>Git & GitHub</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3>Machine Learning</h3>
-                <ul class="skill-list">
-                    <li>Supervised Learning</li>
-                    <li>Unsupervised Learning</li>
-                    <li>Deep Learning (TensorFlow, PyTorch)</li>
-                    <li>Natural Language Processing</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3>Data Visualization</h3>
-                <ul class="skill-list">
-                    <li>Matplotlib & Seaborn</li>
-                    <li>Plotly & Dash</li>
-                    <li>Tableau</li>
-                    <li>Power BI</li>
-                </ul>
-            </div>
-            <div class="skill-category">
-                <h3>Tools & Technologies</h3>
-                <ul class="skill-list">
-                    <li>Jupyter Notebooks</li>
-                    <li>Apache Spark</li>
-                    <li>Docker</li>
-                    <li>AWS / Google Cloud</li>
-                </ul>
+    <section id="skills" class="py-24 px-4 bg-dark-900">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-extralight text-white mb-4 tracking-tight">Technical Skills</h2>
+            <div class="w-12 h-px bg-white mb-12"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <template x-for="skillSet in data.skills" :key="skillSet.category">
+                    <div class="border border-dark-800 p-6 hover-lift bg-black">
+                        <h3 class="text-white font-light mb-4 tracking-widest text-xs uppercase" x-text="skillSet.category"></h3>
+                        <ul class="space-y-3">
+                            <template x-for="skill in skillSet.items" :key="skill">
+                                <li class="text-gray-500 text-sm font-light flex items-start">
+                                    <span class="text-gray-700 mr-3">—</span>
+                                    <span x-text="skill"></span>
+                                </li>
+                            </template>
+                        </ul>
+                    </div>
+                </template>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects">
-        <h2>Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image">📊</div>
-                <div class="project-content">
-                    <h3>Customer Segmentation Analysis</h3>
-                    <p>Implemented K-means clustering to segment customers based on purchasing behavior, enabling targeted marketing strategies that increased conversion rates by 25%.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Scikit-learn</span>
-                        <span class="tag">K-means</span>
+    <section id="projects" class="py-24 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-extralight text-white mb-4 tracking-tight">Featured Projects</h2>
+            <div class="w-12 h-px bg-white mb-12"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <template x-for="project in data.projects" :key="project.title">
+                    <div class="border border-dark-800 hover-lift group">
+                        <!-- Project Header -->
+                        <div class="p-8 border-b border-dark-800">
+                            <div class="flex items-start justify-between mb-4">
+                                <span class="text-4xl" x-text="project.icon"></span>
+                                <div class="flex gap-3">
+                                    <a :href="project.links.code" 
+                                       class="text-gray-600 hover:text-white transition"
+                                       target="_blank"
+                                       x-show="project.links.code">
+                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                        </svg>
+                                    </a>
+                                    <a :href="project.links.demo" 
+                                       class="text-gray-600 hover:text-white transition"
+                                       target="_blank"
+                                       x-show="project.links.demo">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <h3 class="text-xl font-light text-white mb-3 tracking-wide" x-text="project.title"></h3>
+                            <p class="text-gray-500 text-sm font-light leading-relaxed" x-text="project.description"></p>
+                        </div>
+                        
+                        <!-- Project Tags & Metrics -->
+                        <div class="p-8 space-y-4">
+                            <div class="flex flex-wrap gap-2">
+                                <template x-for="tag in project.tags" :key="tag">
+                                    <span class="px-3 py-1 border border-dark-800 text-gray-600 text-xs font-light tracking-wide" x-text="tag"></span>
+                                </template>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-4 pt-4" x-show="project.metrics">
+                                <template x-for="metric in project.metrics" :key="metric.label">
+                                    <div>
+                                        <div class="text-white font-light text-lg" x-text="metric.value"></div>
+                                        <div class="text-gray-600 text-xs font-light" x-text="metric.label"></div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
                     </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">View Code →</a>
-                        <a href="#" class="project-link">Live Demo →</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image">🤖</div>
-                <div class="project-content">
-                    <h3>Sentiment Analysis Tool</h3>
-                    <p>Built a deep learning model using LSTM networks to analyze customer reviews, achieving 92% accuracy in sentiment classification across multiple product categories.</p>
-                    <div class="project-tags">
-                        <span class="tag">TensorFlow</span>
-                        <span class="tag">NLP</span>
-                        <span class="tag">LSTM</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">View Code →</a>
-                        <a href="#" class="project-link">Live Demo →</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image">📈</div>
-                <div class="project-content">
-                    <h3>Sales Forecasting Dashboard</h3>
-                    <p>Developed an interactive dashboard using time series analysis to predict future sales trends, helping the business optimize inventory management and reduce costs by 15%.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">ARIMA</span>
-                        <span class="tag">Plotly Dash</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">View Code →</a>
-                        <a href="#" class="project-link">Live Demo →</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image">🔍</div>
-                <div class="project-content">
-                    <h3>Image Classification System</h3>
-                    <p>Created a CNN-based image classifier for medical imaging that assists in early disease detection, achieving 89% accuracy on validation datasets.</p>
-                    <div class="project-tags">
-                        <span class="tag">PyTorch</span>
-                        <span class="tag">CNN</span>
-                        <span class="tag">Computer Vision</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">View Code →</a>
-                        <a href="#" class="project-link">Live Demo →</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image">💰</div>
-                <div class="project-content">
-                    <h3>Fraud Detection Model</h3>
-                    <p>Designed an anomaly detection system using Random Forest and XGBoost to identify fraudulent transactions, reducing false positives by 40%.</p>
-                    <div class="project-tags">
-                        <span class="tag">XGBoost</span>
-                        <span class="tag">Random Forest</span>
-                        <span class="tag">Anomaly Detection</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">View Code →</a>
-                        <a href="#" class="project-link">Live Demo →</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-image">🌐</div>
-                <div class="project-content">
-                    <h3>Recommendation Engine</h3>
-                    <p>Built a collaborative filtering recommendation system that improved user engagement by 35% through personalized content suggestions.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Matrix Factorization</span>
-                        <span class="tag">Apache Spark</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link">View Code →</a>
-                        <a href="#" class="project-link">Live Demo →</a>
-                    </div>
-                </div>
+                </template>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
-        <h2>Let's Connect</h2>
-        <div class="contact-content">
-            <p>Interested in collaboration or have a project in mind? Let's discuss how data science can drive your business forward.</p>
-            <div class="social-links">
-                <a href="https://github.com/neelsheesh" class="social-link">
-                    <span>GitHub</span>
-                </a>
-                <a href="https://www.linkedin.com/in/neel-shisheer-781368369/" class="social-link">
-                    <span>LinkedIn</span>
-                </a>
-                <a href="mailto:neel.shish.@gmail.com" class="social-link">
-                    <span>Email</span>
-                </a>
-                <a href="https://www.kaggle.com/neelshisheer" class="social-link">
-                    <span>Kaggle</span>
-                </a>
+    <section id="contact" class="py-24 px-4 bg-dark-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-extralight text-white mb-4 tracking-tight">Let's Connect</h2>
+            <div class="w-12 h-px bg-white mb-8 mx-auto"></div>
+            <p class="text-gray-500 mb-12 font-light">Interested in collaboration or have a project in mind?</p>
+            
+            <div class="flex flex-wrap gap-4 justify-center">
+                <template x-for="(url, platform) in data.personal.contacts" :key="platform">
+                    <a :href="url" 
+                       target="_blank"
+                       class="px-6 py-3 border border-dark-800 text-gray-400 hover:text-white hover:border-gray-600 transition font-light tracking-widest text-xs uppercase"
+                       x-text="platform">
+                    </a>
+                </template>
             </div>
         </div>
     </section>
 
-    
-    <footer>
-        <p>&copy; Data Science Portfolio. Built with passion and Python.</p>
+    <!-- Footer -->
+    <footer class="py-12 px-4 border-t border-dark-800">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-gray-600 text-sm font-light tracking-wide">
+                © <span x-text="new Date().getFullYear()"></span> <span x-text="data.personal.name"></span>. Built with precision.
+            </p>
+        </div>
     </footer>
 
     <script>
-        
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        function portfolio() {
+            return {
+                data: {
+                    personal: {
+                        name: "neel shisheer.",
+                        initials: "ns.",
+                        title: "graduate data scientist eager to work",
+                        tagline: "transforming complex data into actionable insights for business",
+                        about: [
+                            "I'm a data scientist specializing in machine learning, statistical modeling, and predictive analytics. With a passion for solving complex problems, I build end-to-end data science solutions that drive business value.",
+                            "My expertise spans the full data science lifecycle—from data collection and feature engineering to model deployment and monitoring. I combine technical rigor with business acumen to deliver insights that inform strategic decision-making.",
+                            "I believe in the power of data to transform organizations and am constantly exploring new techniques in deep learning, NLP, and computer vision to push the boundaries of what's possible."
+                        ],
+                        contacts: {
+                            github: "https://github.com/neelsheesh",
+                            linkedin: "https://www.linkedin.com/in/neel-shisheer-781368369/",
+                            email: "mailto:neel.shish@gmail.com",
+                            kaggle: "https://www.kaggle.com/neelshisheer"
+                        }
+                    },
+
+                    stats: [
+                        { value: "1", label: "Projects Completed" },
+                        { value: "1", label: "ML Models Deployed" },
+                        { value: "1", label: "Years Experience" },
+                        { value: "1", label: "Model Accuracy Avg" }
+                    ],
+
+                    highlights: [
+                        {
+                            icon: "",
+                            title: "placeholder",
+                            description: "Expertise in supervised/unsupervised learning, ensemble methods, and deep learning architectures"
+                        },
+                        {
+                            icon: "",
+                            title: "placeholder",
+                            description: "Building scalable pipelines for data processing, ETL workflows, and real-time analytics"
+                        },
+                        {
+                            icon: "",
+                            title: "placeholder",
+                            description: "Production-ready model deployment with Docker, Kubernetes, and CI/CD pipelines"
+                        }
+                    ],
+
+                    skills: [
+                        {
+                            category: "languages",
+                            items: [
+                                "Python",
+                                "R",
+                                "SQL",
+                                "Pig Latin",
+                                "Scala"
+                            ]
+                        },
+                        {
+                            category: "ML/DL Frameworks",
+                            items: [
+                                "TensorFlow",
+                                "PyTorch",
+                                "Scikit-learn",
+                            ]
+                        },
+                        {
+                            category: "Data Tools",
+                            items: [
+                                "Pandas & NumPy",
+                                "Apache Spark",
+                                "Elastic MapReduce",
+                                "Maven",
+                            ]
+                        },
+                        {
+                            category: "Visualisation",
+                            items: [
+                                "Matplotlib & Seaborn",
+                                "Plotly & Dash",
+                                "Tableau",
+                                "Power BI",
+                                "D3.js"
+                            ]
+                        },
+                        {
+                            category: "Databases",
+                            items: [
+                                "PostgreSQL",
+                                "MongoDB",
+                                "Azure SQL",
+                            ]
+                        },
+                        {
+                            category: "Specialisations",
+                            items: [
+                                "Data Analysis for Business",
+                                "Time Series",
+                                "Recommender Systems",
+                                "A/B Testing"
+                            ]
+                        },
+                        {
+                            category: "Tools",
+                            items: [
+                                "Git & GitHub",
+                                "Jupyter",
+                                "VS Code",
+                                "Linux/Unix",
+                                "Terraform"
+                            ]
+                        }
+                    ],
+                    
+                    projects: [
+                        {<!--
+                            title: "Customer Churn Prediction System",
+                            description: "Built an ensemble ML model combining XGBoost and LightGBM to predict customer churn with 94% accuracy. Implemented real-time scoring API using FastAPI and deployed on AWS Lambda. Reduced churn by 23% through targeted intervention strategies.",
+                            icon: "",
+                            tags: ["Python", "XGBoost", "FastAPI", "AWS Lambda", "MLflow"],
+                            metrics: [
+                                { value: "94%", label: "Accuracy" },
+                                { value: "23%", label: "Churn Reduction" }
+                            ],
+                            links: {
+                                code: "",
+                                demo: null
+                            }
+                        -->}
+                        ]
                 }
-            });
-        });
-
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.skill-category, .project-card').forEach(el => {
-            observer.observe(el);
-        });
+            }
+        }
     </script>
 </body>
-
 </html>
