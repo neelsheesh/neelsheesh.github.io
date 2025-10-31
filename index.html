@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neel Shisheer - Data Science Portfolio</title>
+    <title>Neel Shisheer // Data Scientist</title>
     
     <!-- Alpine.js -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -16,12 +16,19 @@
             theme: {
                 extend: {
                     colors: {
+                        'jetbrains-orange': '#FF6B35',
+                        'jetbrains-pink': '#F73859',
+                        'jetbrains-purple': '#B24BF3',
+                        'jetbrains-blue': '#3592FF',
                         dark: {
                             950: '#000000',
                             900: '#0a0a0a',
                             850: '#0f0f0f',
                             800: '#1a1a1a',
                         }
+                    },
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
@@ -29,39 +36,86 @@
     </script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: -0.02em;
+        }
         
         .hover-lift {
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .hover-lift:hover {
             transform: translateY(-4px);
-            border-color: #333333;
+            border-color: #FF6B35;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.2);
         }
 
-        ::-webkit-scrollbar { width: 8px; }
+        .jetbrains-gradient {
+            background: linear-gradient(135deg, #FF6B35 0%, #F73859 50%, #B24BF3 100%);
+        }
+
+        .jetbrains-gradient-text {
+            background: linear-gradient(135deg, #FF6B35 0%, #F73859 50%, #B24BF3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: #000000; }
-        ::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #333333; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(180deg, #FF6B35 0%, #F73859 100%);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: #FF6B35; }
+
+        ::selection {
+            background: #FF6B35;
+            color: #000000;
+        }
+
+        @keyframes gradient-slide {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .animated-gradient {
+            background: linear-gradient(90deg, #FF6B35, #F73859, #B24BF3, #3592FF, #FF6B35);
+            background-size: 200% 200%;
+            animation: gradient-slide 4s ease infinite;
+        }
+
+        .code-accent {
+            position: relative;
+        }
+
+        .code-accent::before {
+            content: '//';
+            color: #666;
+            margin-right: 0.5rem;
+        }
     </style>
 </head>
 
-<body class="bg-black text-gray-400 antialiased" x-data="portfolio()">
+<body class="bg-black text-gray-400 antialiased font-mono" x-data="portfolio()">
     
     <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-black/95 backdrop-blur-sm border-b border-dark-800 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <a href="#" class="text-white font-light tracking-widest text-sm uppercase">
-                    <span x-text="data.personal.initials"></span>
+                <a href="#" class="flex items-center space-x-2">
+                    <span class="text-jetbrains-orange font-bold text-lg">&lt;</span>
+                    <span class="text-white font-medium tracking-tight" x-text="data.personal.initials"></span>
+                    <span class="text-jetbrains-orange font-bold text-lg">/&gt;</span>
                 </a>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="text-gray-400 hover:text-white transition font-light tracking-wide text-sm">About</a>
-                    <a href="#skills" class="text-gray-400 hover:text-white transition font-light tracking-wide text-sm">Skills</a>
-                    <a href="#projects" class="text-gray-400 hover:text-white transition font-light tracking-wide text-sm">Projects</a>
-                    <a href="#contact" class="text-gray-400 hover:text-white transition font-light tracking-wide text-sm">Contact</a>
+                    <a href="#about" class="text-gray-500 hover:text-jetbrains-orange transition font-normal text-sm">.about()</a>
+                    <a href="#skills" class="text-gray-500 hover:text-jetbrains-pink transition font-normal text-sm">.skills()</a>
+                    <a href="#projects" class="text-gray-500 hover:text-jetbrains-purple transition font-normal text-sm">.projects()</a>
+                    <a href="#contact" class="text-gray-500 hover:text-jetbrains-blue transition font-normal text-sm">.contact()</a>
                 </div>
             </div>
         </div>
@@ -70,25 +124,47 @@
     <!-- Hero Section -->
     <section class="min-h-screen flex items-center justify-center px-4 pt-16">
         <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-5xl md:text-7xl font-extralight text-white mb-6 tracking-tight" x-text="data.personal.name"></h1>
-            <p class="text-xl md:text-2xl text-gray-500 mb-4 font-light" x-text="data.personal.title"></p>
-            <p class="text-lg text-gray-600 mb-12 font-light tracking-wide" x-text="data.personal.tagline"></p>
+            <div class="mb-6">
+                <span class="text-gray-600 text-sm">const developer = {</span>
+            </div>
             
-            <div class="flex flex-wrap gap-4 justify-center">
-                <a href="#projects" class="px-8 py-3 bg-white text-black font-light tracking-wide hover:bg-gray-200 transition text-sm">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                <span class="jetbrains-gradient-text" x-text="data.personal.name"></span>
+            </h1>
+            
+            <p class="text-xl md:text-2xl mb-4">
+                <span class="text-gray-600">role:</span>
+                <span class="text-jetbrains-orange font-medium" x-text="'\"' + data.personal.title + '\"'"></span>
+            </p>
+            
+            <p class="text-lg text-gray-500 mb-12 font-normal">
+                <span class="text-gray-700">//</span> <span x-text="data.personal.tagline"></span>
+            </p>
+            
+            <div class="mb-6">
+                <span class="text-gray-600 text-sm">}</span>
+            </div>
+            
+            <div class="flex flex-wrap gap-4 justify-center mb-20">
+                <a href="#projects" class="px-8 py-3 jetbrains-gradient text-black font-medium hover:opacity-90 transition">
                     View Projects
                 </a>
-                <a href="#contact" class="px-8 py-3 border border-gray-800 text-white font-light tracking-wide hover:border-gray-600 transition text-sm">
+                <a href="#contact" class="px-8 py-3 border-2 border-jetbrains-orange text-jetbrains-orange font-medium hover:bg-jetbrains-orange hover:text-black transition">
                     Get in Touch
                 </a>
             </div>
             
             <!-- Stats -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20">
-                <template x-for="stat in data.stats" :key="stat.label">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <template x-for="(stat, index) in data.stats" :key="stat.label">
                     <div class="border border-dark-800 p-6 hover-lift">
-                        <div class="text-3xl font-light text-white mb-2" x-text="stat.value"></div>
-                        <div class="text-sm text-gray-600 font-light tracking-wide" x-text="stat.label"></div>
+                        <div class="text-gray-600 text-xs mb-2 font-mono">
+                            <span x-text="'stat[' + index + ']'"></span>
+                        </div>
+                        <div class="text-3xl font-bold mb-2">
+                            <span class="jetbrains-gradient-text" x-text="stat.value"></span>
+                        </div>
+                        <div class="text-xs text-gray-600 font-normal" x-text="stat.label"></div>
                     </div>
                 </template>
             </div>
@@ -98,22 +174,28 @@
     <!-- About Section -->
     <section id="about" class="py-24 px-4">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl font-extralight text-white mb-4 tracking-tight">About</h2>
-            <div class="w-12 h-px bg-white mb-12"></div>
+            <h2 class="text-3xl font-bold text-white mb-2">
+                <span class="text-jetbrains-orange">function</span> About()
+            </h2>
+            <div class="w-20 h-1 animated-gradient mb-12"></div>
             
-            <div class="space-y-6">
-                <template x-for="paragraph in data.personal.about" :key="paragraph">
-                    <p class="text-gray-400 leading-relaxed font-light" x-text="paragraph"></p>
+            <div class="space-y-6 pl-6 border-l-2 border-dark-800">
+                <template x-for="(paragraph, index) in data.personal.about" :key="index">
+                    <p class="text-gray-400 leading-relaxed font-normal">
+                        <span class="text-gray-700" x-text="'/* ' + (index + 1) + ' */ '"></span>
+                        <span x-text="paragraph"></span>
+                    </p>
                 </template>
             </div>
 
             <!-- Expertise Highlights -->
             <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <template x-for="highlight in data.highlights" :key="highlight.title">
-                    <div class="border border-dark-800 p-6 hover-lift">
+                <template x-for="(highlight, index) in data.highlights" :key="highlight.title">
+                    <div class="border border-dark-800 p-6 hover-lift relative overflow-hidden group">
+                        <div class="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-jetbrains-orange via-jetbrains-pink to-jetbrains-purple"></div>
                         <div class="text-2xl mb-3" x-text="highlight.icon"></div>
-                        <h3 class="text-white font-light mb-2 tracking-wide" x-text="highlight.title"></h3>
-                        <p class="text-gray-500 text-sm font-light leading-relaxed" x-text="highlight.description"></p>
+                        <h3 class="text-white font-medium mb-2" x-text="highlight.title"></h3>
+                        <p class="text-gray-500 text-sm font-normal leading-relaxed" x-text="highlight.description"></p>
                     </div>
                 </template>
             </div>
@@ -123,17 +205,21 @@
     <!-- Skills Section -->
     <section id="skills" class="py-24 px-4 bg-dark-900">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-extralight text-white mb-4 tracking-tight">Technical Skills</h2>
-            <div class="w-12 h-px bg-white mb-12"></div>
+            <h2 class="text-3xl font-bold text-white mb-2">
+                <span class="text-jetbrains-pink">const</span> skills = [
+            </h2>
+            <div class="w-20 h-1 animated-gradient mb-12"></div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <template x-for="skillSet in data.skills" :key="skillSet.category">
+                <template x-for="(skillSet, setIndex) in data.skills" :key="skillSet.category">
                     <div class="border border-dark-800 p-6 hover-lift bg-black">
-                        <h3 class="text-white font-light mb-4 tracking-widest text-xs uppercase" x-text="skillSet.category"></h3>
+                        <h3 class="text-jetbrains-orange font-medium mb-4 text-sm">
+                            <span x-text="'{' + skillSet.category + '}'"></span>
+                        </h3>
                         <ul class="space-y-3">
-                            <template x-for="skill in skillSet.items" :key="skill">
-                                <li class="text-gray-500 text-sm font-light flex items-start">
-                                    <span class="text-gray-700 mr-3">—</span>
+                            <template x-for="(skill, skillIndex) in skillSet.items" :key="skill">
+                                <li class="text-gray-500 text-sm font-normal flex items-start">
+                                    <span class="text-jetbrains-orange mr-2">▹</span>
                                     <span x-text="skill"></span>
                                 </li>
                             </template>
@@ -141,25 +227,34 @@
                     </div>
                 </template>
             </div>
+            
+            <div class="text-gray-600 mt-6 text-sm">];</div>
         </div>
     </section>
 
     <!-- Projects Section -->
     <section id="projects" class="py-24 px-4">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-extralight text-white mb-4 tracking-tight">Featured Projects</h2>
-            <div class="w-12 h-px bg-white mb-12"></div>
+            <h2 class="text-3xl font-bold text-white mb-2">
+                <span class="text-jetbrains-purple">class</span> Projects
+            </h2>
+            <div class="w-20 h-1 animated-gradient mb-12"></div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <template x-for="project in data.projects" :key="project.title">
-                    <div class="border border-dark-800 hover-lift group">
+                <template x-for="(project, index) in data.projects" :key="project.title">
+                    <div class="border border-dark-800 hover-lift group relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-jetbrains-orange via-jetbrains-pink to-jetbrains-purple"></div>
+                        
                         <!-- Project Header -->
                         <div class="p-8 border-b border-dark-800">
                             <div class="flex items-start justify-between mb-4">
-                                <span class="text-4xl" x-text="project.icon"></span>
+                                <div class="flex items-center space-x-3">
+                                    <span class="text-3xl" x-text="project.icon"></span>
+                                    <span class="text-gray-600 text-xs font-mono" x-text="'[' + index + ']'"></span>
+                                </div>
                                 <div class="flex gap-3">
                                     <a :href="project.links.code" 
-                                       class="text-gray-600 hover:text-white transition"
+                                       class="text-gray-600 hover:text-jetbrains-orange transition"
                                        target="_blank"
                                        x-show="project.links.code">
                                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -167,7 +262,7 @@
                                         </svg>
                                     </a>
                                     <a :href="project.links.demo" 
-                                       class="text-gray-600 hover:text-white transition"
+                                       class="text-gray-600 hover:text-jetbrains-blue transition"
                                        target="_blank"
                                        x-show="project.links.demo">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -176,23 +271,23 @@
                                     </a>
                                 </div>
                             </div>
-                            <h3 class="text-xl font-light text-white mb-3 tracking-wide" x-text="project.title"></h3>
-                            <p class="text-gray-500 text-sm font-light leading-relaxed" x-text="project.description"></p>
+                            <h3 class="text-xl font-bold text-white mb-3" x-text="project.title"></h3>
+                            <p class="text-gray-500 text-sm font-normal leading-relaxed" x-text="project.description"></p>
                         </div>
                         
                         <!-- Project Tags & Metrics -->
-                        <div class="p-8 space-y-4">
+                        <div class="p-8 space-y-4 bg-dark-900">
                             <div class="flex flex-wrap gap-2">
                                 <template x-for="tag in project.tags" :key="tag">
-                                    <span class="px-3 py-1 border border-dark-800 text-gray-600 text-xs font-light tracking-wide" x-text="tag"></span>
+                                    <span class="px-3 py-1 bg-dark-800 border border-dark-800 text-gray-500 text-xs font-normal hover:border-jetbrains-orange hover:text-jetbrains-orange transition" x-text="tag"></span>
                                 </template>
                             </div>
                             
                             <div class="grid grid-cols-2 gap-4 pt-4" x-show="project.metrics">
                                 <template x-for="metric in project.metrics" :key="metric.label">
-                                    <div>
-                                        <div class="text-white font-light text-lg" x-text="metric.value"></div>
-                                        <div class="text-gray-600 text-xs font-light" x-text="metric.label"></div>
+                                    <div class="border-l-2 border-jetbrains-orange pl-3">
+                                        <div class="text-white font-bold text-lg" x-text="metric.value"></div>
+                                        <div class="text-gray-600 text-xs font-normal" x-text="metric.label"></div>
                                     </div>
                                 </template>
                             </div>
@@ -206,15 +301,19 @@
     <!-- Contact Section -->
     <section id="contact" class="py-24 px-4 bg-dark-900">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-extralight text-white mb-4 tracking-tight">Let's Connect</h2>
-            <div class="w-12 h-px bg-white mb-8 mx-auto"></div>
-            <p class="text-gray-500 mb-12 font-light">Interested in collaboration or have a project in mind?</p>
+            <h2 class="text-3xl font-bold text-white mb-2">
+                <span class="text-jetbrains-blue">export default</span> Contact
+            </h2>
+            <div class="w-20 h-1 animated-gradient mb-8 mx-auto"></div>
+            <p class="text-gray-500 mb-12 font-normal">
+                <span class="text-gray-700">//</span> Let's build something together
+            </p>
             
             <div class="flex flex-wrap gap-4 justify-center">
                 <template x-for="(url, platform) in data.personal.contacts" :key="platform">
                     <a :href="url" 
                        target="_blank"
-                       class="px-6 py-3 border border-dark-800 text-gray-400 hover:text-white hover:border-gray-600 transition font-light tracking-widest text-xs uppercase"
+                       class="px-6 py-3 border-2 border-dark-800 text-gray-400 hover:text-white hover:border-jetbrains-orange transition font-normal text-sm uppercase tracking-wider"
                        x-text="platform">
                     </a>
                 </template>
@@ -225,8 +324,10 @@
     <!-- Footer -->
     <footer class="py-12 px-4 border-t border-dark-800">
         <div class="max-w-6xl mx-auto text-center">
-            <p class="text-gray-600 text-sm font-light tracking-wide">
-                © <span x-text="new Date().getFullYear()"></span> <span x-text="data.personal.name"></span>. Built with precision.
+            <p class="text-gray-600 text-sm font-normal">
+                <span class="text-gray-700">//</span> © <span x-text="new Date().getFullYear()"></span> <span x-text="data.personal.name"></span>
+                <span class="text-gray-700 mx-2">|</span>
+                <span class="text-gray-700">Built with</span> <span class="text-jetbrains-orange">♥</span> <span class="text-gray-700">and</span> <span class="text-jetbrains-pink">code</span>
             </p>
         </div>
     </footer>
@@ -367,7 +468,7 @@
                         // Template to follow:
                         {
                             title: "Your First Project Title",
-                            description: "Replace this with your actual project description. Include what problem you solved, what technologies you used, and what results you achieved. Be specific with metrics if possible!",
+                            description: "",
                             icon: "📊",
                             tags: ["Python", "Pandas", "Scikit-learn", "Flask"],
                             metrics: [
@@ -375,13 +476,13 @@
                                 { value: "Y", label: "Data Points" }
                             ],
                             links: {
-                                code: "https://github.com/neelsheesh/your-project",
-                                demo: null  // or add demo link if you have one
+                                code: "https://github.com/neelsheesh/",
+                                demo: null 
                             }
                         },
                         {
-                            title: "Academic Capstone Project",
-                            description: "Add details about your university capstone or final year project. What was the problem? What methods did you use? What were the outcomes?",
+                            title: "Academic Project",
+                            description: "",
                             icon: "🎓",
                             tags: ["Your", "Technologies", "Here"],
                             metrics: [
@@ -389,7 +490,7 @@
                                 { value: "Metric2", label: "Label" }
                             ],
                             links: {
-                                code: "https://github.com/neelsheesh/capstone",
+                                code: "https://github.com/neelsheesh/",
                                 demo: null
                             }
                         },
@@ -403,8 +504,8 @@
                                 { value: "Score", label: "Metric" }
                             ],
                             links: {
-                                code: "https://github.com/neelsheesh/kaggle-project",
-                                demo: "https://www.kaggle.com/neelshisheer/notebook"
+                                code: "https://github.com/neelsheesh",
+                                demo: "https://www.kaggle.com/neelshisheer"
                             }
                         },
                         {
@@ -417,11 +518,11 @@
                                 { value: "Y", label: "Data Sources" }
                             ],
                             links: {
-                                code: "https://github.com/neelsheesh/dashboard",
+                                code: "https://github.com/neelsheesh/",
                                 demo: null
                             }
                         }
-                        // Add more projects by copying the template above!
+                        // placeholders
                     ]
                 }
             }
